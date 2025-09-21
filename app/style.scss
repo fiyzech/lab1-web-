@@ -5,7 +5,7 @@ $muted: #727f8c;
 $line: #e6e8eb;
 $accent: #00b489;          // зелений бейдж років
 $right-bg: #2f3338;        // темний сайдбар
-$right-card: #ffffff;      // картки в сайдбарі
+$right-card: #d4d3d3;      // картки в сайдбарі
 $hero-name: #ffffff;
 
 /* ====== ресети коротко ====== */
@@ -83,13 +83,13 @@ body{margin:0;font:16px/1.5 "Inter",system-ui,Arial,sans-serif;background:$bg;co
 .card--hero{
   background:transparent; color:#cfd6dc; padding:0;
   .card__photo{
-    background:#1f2226; padding:14px; border-radius:6px; text-align:center;
+    background:#1f2226; padding:12px; border-radius:6px; text-align:center;
     img{ width:100%; border-radius:6px; object-fit:cover; }
   }
   .card__name{
     margin-top:14px; color:$hero-name; font:800 24px/1.1 inherit; letter-spacing:.5px
   }
-  .card__role{ color:#9fb3c4; margin-top:4px; font-weight:600 }
+  .card__role{ color:#2c2c2c; margin-top:4px; font-weight:600 }
 }
 
 .card__title{
@@ -101,13 +101,13 @@ body{margin:0;font:16px/1.5 "Inter",system-ui,Arial,sans-serif;background:$bg;co
 
 /* контакти з іконками-ложементами */
 .contacts{ list-style:none; margin:12px 0 0; padding:0; display:grid; gap:10px }
-.ic{ background:#fff; color:#2f3338; border-radius:6px; padding:10px 12px; font-weight:600; }
+.ic{ background:#c2c2c2; color:#2f3338; border-radius:6px; padding:22px 12px; font-weight:600; }
 .ic--phone::before,.ic--web::before,.ic--pin::before{
   content:""; display:inline-block; width:14px; height:14px; margin-right:8px; vertical-align:-2px; background:#00b489; border-radius:3px;
 }
 
 /* мови — кругові індикатори (conic-gradient) */
-.langs{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px }
+.langs{ display:grid; grid-template-columns: repeat(3, 1fr); gap:2px }
 .ring{
   --val: 95;                 // відсоток
   width:92px; height:92px; border-radius:50%;
@@ -126,4 +126,33 @@ body{margin:0;font:16px/1.5 "Inter",system-ui,Arial,sans-serif;background:$bg;co
 @media (max-width: 900px){
   .cv{ grid-template-columns: 1fr }
   .right{ order:-1 }
+}
+
+
+/* ---- коротший темний фон у правій колонці ---- */
+.right{
+  /* керуй висотою темної зони тут */
+  --dark-h: 333px;          
+  --pad-top: 12px;          
+  --pad-x: 18px;
+  --pad-bottom: 18px;
+
+  position: relative;
+  background: transparent;  
+  padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+}
+
+.right::before{
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;       
+  height: var(--dark-h);    
+  background: $right-bg;    
+  border-radius: 8px;       
+}
+
+/* щоб контент лежав над темною плашкою */
+.right > *{
+  position: relative;
+  z-index: 1;
 }
