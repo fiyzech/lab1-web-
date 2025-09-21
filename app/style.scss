@@ -1,0 +1,129 @@
+/* ====== базові змінні ====== */
+$bg: #f5f6f7;
+$ink: #2c2c2c;
+$muted: #727f8c;
+$line: #e6e8eb;
+$accent: #00b489;          // зелений бейдж років
+$right-bg: #2f3338;        // темний сайдбар
+$right-card: #ffffff;      // картки в сайдбарі
+$hero-name: #ffffff;
+
+/* ====== ресети коротко ====== */
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 "Inter",system-ui,Arial,sans-serif;background:$bg;color:$ink}
+
+/* ====== макет сторінки ====== */
+.cv{
+  max-width: 960px;
+  margin: 24px auto;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  display: grid;
+  grid-template-columns: 1fr 340px; // ліва + права
+  gap: 0;
+}
+
+/* ====== ліва колонка ====== */
+.left{ padding: 28px 36px 36px }
+
+.section{ margin: 24px 0 28px }
+.section__title{
+  font: 700 18px/1.2 inherit;
+  text-transform: uppercase;
+  letter-spacing:.5px;
+  margin:0 0 12px;
+  padding: 10px 0;
+  border-top: 2px solid $line;
+  border-bottom: 2px solid $line;
+}
+
+/* досвід/освіта — рядок із зеленою плашкою років ліворуч */
+.job,.edu{ display:grid; grid-template-columns: 140px 1fr; gap:18px; padding:14px 0; border-bottom:1px solid $line }
+.job:last-child,.edu:last-child{ border-bottom:0 }
+.job__years, .edu__years{
+  display:flex; align-items:flex-start;
+  span{
+    background:$accent; color:#fff; font-weight:700; font-size:12px;
+    padding:6px 10px; border-radius:6px;
+  }
+}
+.job__head{ display:grid; grid-template-columns: auto 1fr auto; align-items:end; gap:8px 12px; }
+.job__role{ margin:0; font:700 16px/1.2 inherit }
+.job__place{ color:$muted }
+.job__city{ margin-left:auto; color:$muted; font-weight:600 }
+.job__text{ margin:8px 0 0; color:$muted }
+
+.edu__degree{ margin:0; font:700 16px/1.2 inherit }
+.edu__place{ color:$muted; font-weight:600; margin-bottom:6px }
+.edu__text{ margin:0; color:$muted }
+
+/* references — дві колонки з дугою-лінією як у макеті */
+.refs{ display:grid; grid-template-columns: 1fr 1fr; gap:18px }
+.ref__name{ font-weight:700 }
+.ref__addr,.ref__line{ color:$muted }
+
+/* skills — лінійні бари */
+.skillbars{ list-style:none; margin:0; padding:0; display:grid; gap:12px }
+.skillbars li{ display:grid; grid-template-columns: 220px 1fr; align-items:center; gap:16px }
+.skillbars span{ font-weight:600 }
+.skillbars i{
+  --pct: 80%;
+  display:block; height:8px; background:#e9edf1; border-radius:6px; position:relative; overflow:hidden;
+  &::after{ content:""; position:absolute; inset:0; width:var(--pct); background:$accent; }
+}
+
+/* ====== права колонка (темна смуга) ====== */
+.right{
+  background:$right-bg; color:#cfd6dc; padding:28px 24px;
+  display:flex; flex-direction:column; gap:18px;
+}
+
+/* верхня карта з фото і ім’ям */
+.card{ background:$right-card; color:$ink; border-radius:6px; padding:18px }
+.card--hero{
+  background:transparent; color:#cfd6dc; padding:0;
+  .card__photo{
+    background:#1f2226; padding:14px; border-radius:6px; text-align:center;
+    img{ width:100%; border-radius:6px; object-fit:cover; }
+  }
+  .card__name{
+    margin-top:14px; color:$hero-name; font:800 24px/1.1 inherit; letter-spacing:.5px
+  }
+  .card__role{ color:#9fb3c4; margin-top:4px; font-weight:600 }
+}
+
+.card__title{
+  margin:0 0 10px; font:800 14px/1.2 inherit; text-transform:uppercase; letter-spacing:.6px
+}
+
+.muted{ color:$muted }
+.quote{ font-weight:700; margin:8px 0; }
+
+/* контакти з іконками-ложементами */
+.contacts{ list-style:none; margin:12px 0 0; padding:0; display:grid; gap:10px }
+.ic{ background:#fff; color:#2f3338; border-radius:6px; padding:10px 12px; font-weight:600; }
+.ic--phone::before,.ic--web::before,.ic--pin::before{
+  content:""; display:inline-block; width:14px; height:14px; margin-right:8px; vertical-align:-2px; background:#00b489; border-radius:3px;
+}
+
+/* мови — кругові індикатори (conic-gradient) */
+.langs{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px }
+.ring{
+  --val: 95;                 // відсоток
+  width:92px; height:92px; border-radius:50%;
+  background:
+    conic-gradient($accent calc(var(--val)*1%), #e6eef3 0);
+  display:grid; place-items:center;
+}
+.ring span{ display:grid; place-items:center; text-align:center; font-weight:800; color:$ink; width:76px; height:76px; border-radius:50%; background:#fff }
+.ring small{ display:block; font:700 10px/1.2 inherit; color:$muted; margin-top:2px }
+
+/* hobbies — піктограми-відсіки */
+.hobbies{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns: repeat(2,1fr); gap:10px }
+.hob{ background:#fff; color:#2f3338; border-radius:6px; padding:10px 12px; text-transform:uppercase; font-weight:700; font-size:12px; text-align:center }
+
+/* адаптив дрібний */
+@media (max-width: 900px){
+  .cv{ grid-template-columns: 1fr }
+  .right{ order:-1 }
+}
